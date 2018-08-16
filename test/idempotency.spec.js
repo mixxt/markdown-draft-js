@@ -73,8 +73,8 @@ describe('idempotency', function () {
 
   it('renders links correctly', function () {
     var markdown = 'This is a test of [a link](https://google.com)\n\nAnd [perhaps](https://facebook.github.io/draft-js/) we should test once more.';
-    var rawDraftConversion = markdownToDraft(markdown);
-    var markdownConversion = draftToMarkdown(rawDraftConversion);
+    var rawDraftConversion = markdownToDraft(markdown, {preserveNewlines:true});
+    var markdownConversion = draftToMarkdown(rawDraftConversion, {preserveNewlines:true});
 
     expect(markdownConversion).toEqual(markdown);
   });

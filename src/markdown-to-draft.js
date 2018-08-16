@@ -252,7 +252,7 @@ function markdownToDraft(string, options = {}) {
         // This is probably my least favourite thing in this file, but not sure what could be better.
         if (previousBlockEndingLine) {
           var totalEmptyParagraphsToCreate = item.lines[0] - previousBlockEndingLine;
-          for (var i = 0; i < totalEmptyParagraphsToCreate; i++) {
+          for (var i = 0; i <= totalEmptyParagraphsToCreate; i++) {
             blocks.push(DefaultBlockTypes.paragraph_open());
           }
         }

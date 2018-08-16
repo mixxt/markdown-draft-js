@@ -373,15 +373,20 @@ function renderBlock(block, index, rawDraftObject, options) {
   if (SingleNewlineAfterBlock.indexOf(type) !== -1 && rawDraftObject.blocks[index + 1] && SingleNewlineAfterBlock.indexOf(rawDraftObject.blocks[index + 1].type) !== -1) {
     markdownString += '\n';
   } else if (rawDraftObject.blocks[index + 1]) {
+    // ok, there are more blocks available
     if (rawDraftObject.blocks[index].text) {
-      if (type === 'unstyled' && options.preserveNewlines) {
-        markdownString += '\n\n';
+      if (type === 'unstyled' && rawDraftObject.blocks[index + 1].type === 'unstyled' && rawDraftObject.blocks[index + 1].text) {
+        // handle standard markdown linebreak behaviour paragraph followed by paragraph with text is only splitted by one newline
+        markdownString += '\n';
       } else if (!options.preserveNewlines) {
+        // not a normal block and preserve is off
         markdownString += '\n\n';
       } else {
+        // all other cases
         markdownString += '\n';
       }
     } else if (options.preserveNewlines) {
+      // empty text paragraphs will render a single newline if preserve is on
       markdownString += '\n';
     }
   }
