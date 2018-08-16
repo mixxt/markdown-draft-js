@@ -5,7 +5,7 @@ const TRAILING_WHITESPACE = /[ \u0020\t]*$/;
 // - Back tics  (see https://github.com/Rosey/markdown-draft-js/issues/52#issuecomment-388458017)
 // - Complex markdown, like links or images. Not sure it's even worth it, because if you're typing
 // that into draft chances are you know its markdown and maybe expect it convert? :/
-const MARKDOWN_STYLE_CHARACTERS = /(\*|_|~|\\|`)/;
+const MARKDOWN_STYLE_CHARACTERS = /(?:\s|^)(\*|_|~|`)/;
 
 // I hate this a bit, being outside of the function’s scope
 // but can’t think of a better way to keep track of how many ordered list
@@ -18,8 +18,8 @@ const MARKDOWN_STYLE_CHARACTERS = /(\*|_|~|\\|`)/;
 // 2. Item two
 // 3. Item three
 // And so on.
-var orderedListNumber = {},
-    previousOrderedListDepth = 0;
+let orderedListNumber = {};
+let previousOrderedListDepth = 0;
 
 // A map of draftjs block types -> markdown open and close characters
 // Both the open and close methods must exist, even if they simply return an empty string.
