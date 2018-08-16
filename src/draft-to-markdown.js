@@ -363,7 +363,7 @@ function renderBlock(block, index, rawDraftObject, options) {
         // OR ````Test ``` Hello ````
         // Similar work has to be done for codeblocks.
       } else {
-        // Escaping inline markdown characters
+        // Escaping inline markdown characters (but only if not inside a word)
         if (characterIndex === 0 ||
             block.text[characterIndex-1] === ' ' ||
             MARKDOWN_STYLE_CHARACTERS.test(block.text[characterIndex-1]) ||
