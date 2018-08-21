@@ -321,10 +321,7 @@ function renderBlock(block, index, rawDraftObject, options) {
       markdownToAdd = [];
     }
 
-    if (
-      !openInlineStyles.find(function (style) { return style.style === 'CODE' }) &&
-      block.type !== 'code-block'
-    ) {
+    if (block.type !== 'code-block' && !openInlineStyles.find((style) => style.style === 'CODE')) {
       // Escaping inline markdown characters (but only if not inside a word)
       if (characterIndex === 0 ||
           block.text[characterIndex-1] === ' ' ||
