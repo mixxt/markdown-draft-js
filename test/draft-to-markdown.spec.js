@@ -344,6 +344,23 @@ describe('draftToMarkdown', function () {
       expect(markdown).toEqual('1. item\n2. item');
     });
 
+    it('renders lists between text blocks correctly with preservedNewlines on', function () {
+      /* eslint-disable */
+      var rawObject = {
+        "entityMap": {},
+        "blocks": [
+          {"key":"abcde","text":"Text at the beginning","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},
+          {"key":"d9c1d","text":"item 1","type":"ordered-list-item","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},
+          {"key":"meoh","text":"item 2","type":"ordered-list-item","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},
+          {"key":"edcba","text":"Text at the end","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}
+        ]
+      };
+      /* eslint-enable */
+      var markdown = draftToMarkdown(rawObject, { preserveNewlines: true });
+
+      expect(markdown).toEqual('Text at the beginning\n\n1. item 1\n2. item 2\n\nText at the end');
+    });
+
     it('renders emoji correctly', function () {
       /* eslint-disable */
       var rawObject =  {

@@ -417,6 +417,12 @@ function renderBlock(block, index, rawDraftObject, options) {
       if (type === 'unstyled' && rawDraftObject.blocks[index + 1].type === 'unstyled' && rawDraftObject.blocks[index + 1].text) {
         // handle standard markdown linebreak behaviour paragraph followed by paragraph with text is only splitted by one newline
         markdownString += '\n';
+      } else if (type === 'unstyled' && rawDraftObject.blocks[index + 1].type !== 'unstyled') {
+        // text block followed by a normal text block, add two linebreaks
+        markdownString += '\n\n';
+      } else if (type !== 'unstyled' && rawDraftObject.blocks[index + 1].type === 'unstyled') {
+        // other block followed by a normal text block, add two linebreads
+        markdownString += '\n\n';
       } else if (!options.preserveNewlines) {
         // not a normal block and preserve is off
         markdownString += '\n\n';
